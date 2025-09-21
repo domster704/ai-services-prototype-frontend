@@ -4,7 +4,7 @@ interface TextGearsGrammarCheckerError {
   description: Record<string, string>;
 }
 
-interface TextGearsGrammarCheckerObject {
+export interface TextGearsGrammarCheckerObject {
   response: {
     errors: TextGearsGrammarCheckerError[]
   }

@@ -1,4 +1,3 @@
-
 interface UnifiedError {
   offset: number
   length: number
@@ -10,7 +9,7 @@ interface UnifiedError {
 }
 
 
-interface ComparisonResult {
+export interface ComparisonResult {
   common: UnifiedError[];
   only_text_gears: UnifiedError[];
   only_trinka: UnifiedError[];

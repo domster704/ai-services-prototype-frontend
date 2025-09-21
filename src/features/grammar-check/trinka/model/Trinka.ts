@@ -10,6 +10,6 @@ interface TrinkaItem {
   result: TrinkaResult[];
 }
 
-interface TrinkaCheckResult {
+export interface TrinkaCheckResult {
   sentences: TrinkaItem[];
 }

@@ -13,7 +13,7 @@ const AppProviders: FC<{ children: React.ReactNode }> = ({children}) => {
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <CssBaseline />
+      <CssBaseline/>
       {children}
     </ThemeProvider>
   );

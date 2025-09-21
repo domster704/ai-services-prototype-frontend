@@ -2,12 +2,20 @@ import React, {FC, useEffect} from 'react';
 import {Button} from "@mui/material";
 import {fetchComparisonAnalysis} from "@features/grammar-check/comparison-analysis/api/comparisonAnalysisApi";
 import {useGrammarCheckApi} from "@features/grammar-check/hooks";
+import {ComparisonResult} from "@features/grammar-check/comparison-analysis";
 
 export function useComparisonAnalysisCheck() {
   return useGrammarCheckApi<ComparisonResult>(fetchComparisonAnalysis);
 }
 
-const GrammarChecker: FC<ButtonGrammarProps> = ({text, onResult}) => {
+/**
+ * Кнопка для запуска сравнения ошибок через TextGears и Trinka
+ *
+ * @param text Текст для проверки
+ * @param onResult Callback для обработки результата {@link ComparisonResult}
+ * @constructor
+ */
+const ComparisonAnalysisButton: FC<ButtonGrammarProps> = ({text, onResult}) => {
   const {loading, result, error, handleCheck} = useComparisonAnalysisCheck()
 
   useEffect(() => {
@@ -25,4 +33,4 @@ const GrammarChecker: FC<ButtonGrammarProps> = ({text, onResult}) => {
   );
 }
 
-export default GrammarChecker;
+export default ComparisonAnalysisButton;

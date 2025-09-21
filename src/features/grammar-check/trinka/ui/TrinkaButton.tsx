@@ -2,13 +2,21 @@ import React, {FC, useEffect} from 'react';
 import {Button} from "@mui/material";
 import {fetchTrinkaGrammarCheck} from "@features/grammar-check/trinka/api/trinkaApi";
 import {useGrammarCheckApi} from "@features/grammar-check/hooks";
+import {TrinkaCheckResult} from "@features/grammar-check/trinka/model/Trinka";
 
 
 export function useTrinkaCheck() {
   return useGrammarCheckApi<TrinkaCheckResult>(fetchTrinkaGrammarCheck);
 }
 
-const GrammarChecker: FC<ButtonGrammarProps> = ({text, onResult}) => {
+/**
+ * Кнопка для запуска проверки текста через Trinka Grammar Checker
+ *
+ * @param text Текст для проверки
+ * @param onResult Callback для обработки результата {@link TrinkaCheckResult}
+ * @constructor
+ */
+const TrinkaButton: FC<ButtonGrammarProps> = ({text, onResult}) => {
   const {loading, result, error, handleCheck} = useTrinkaCheck()
 
   useEffect(() => {
@@ -26,4 +34,4 @@ const GrammarChecker: FC<ButtonGrammarProps> = ({text, onResult}) => {
   );
 }
 
-export default GrammarChecker;
+export default TrinkaButton;

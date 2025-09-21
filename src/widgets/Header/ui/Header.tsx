@@ -1,15 +1,17 @@
 import React, {FC} from 'react';
-import * as style from './Header.module.css'
 import {useAppDispatch, useAppSelector} from "@app/store/store";
+import {AppBar, Typography} from "@mui/material";
 
 const Header: FC = (props) => {
   const global = useAppSelector(state => state.global);
   const dispatch = useAppDispatch();
 
   return (
-    <header className={style.header}>
-      header
-    </header>
+    <AppBar position="static" sx={{p: 2}}>
+      <Typography variant="h5" sx={{my: 1}}>
+        AI Services Prototype
+      </Typography>
+    </AppBar>
   );
 }
 

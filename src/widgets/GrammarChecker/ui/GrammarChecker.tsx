@@ -1,55 +1,39 @@
 import React, {FC, useState} from 'react';
-import {Button, ButtonGroup, Stack, TextField} from "@mui/material";
-import SaveIcon from '@mui/icons-material/Save';
-import {fetchTextGearsGrammarCheck} from "@entities/textGears/api/textGearsApi";
-import {fetchTrinkaGrammarCheck} from "@entities/trinka/api/trinkaApi";
+import {ButtonGroup, Stack, TextField} from "@mui/material";
+import TextGearsButton from "@features/grammar-check/text-gears/ui/TextGearsButton";
+import TrinkaButton from "@features/grammar-check/trinka/ui/TrinkaButton";
+import ComparisonAnalysisButton from "@features/grammar-check/comparison-analysis/ui/ComparisonAnalysisButton";
+import {JsonEditor} from "json-edit-react";
+
+import * as style from './GrammarChecker.module.css'
 
 const GrammarChecker: FC = (props) => {
   const [text, setText] = useState<string>("");
-  const [textGearsLoading, setTextGearsLoading] = useState<boolean>(false);
-  const [trinkaLoading, setTrinkaLoading] = useState<boolean>(false);
-
-  const handleTextGearsClick = async () => {
-    setTextGearsLoading(true);
-    const res = await fetchTextGearsGrammarCheck(text)
-    setTextGearsLoading(false);
-    console.log(res)
-  }
-
-  const handleTrinkaClick = async () => {
-    setTrinkaLoading(true);
-    const res = await fetchTrinkaGrammarCheck(text)
-    setTrinkaLoading(false);
-    console.log(res)
-  }
+  const [data, setData] = useState<any>(null);
 
   return (
-    <Stack spacing={2}>
+    <Stack spacing={2} className={style.grammarChecker}>
       <TextField
         placeholder="Text.."
         multiline
-        sx={{
-          width: '50%'
-        }}
+        fullWidth
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           setText(event.target.value);
         }}
       />
-      <ButtonGroup variant="outlined" aria-label="Loading button group">
-        <Button onClick={handleTextGearsClick}
-                loading={textGearsLoading}
-                loadingPosition="start">
-          Проверить TextGears
-        </Button>
-        <Button onClick={handleTrinkaClick}
-                loading={trinkaLoading}
-                loadingPosition="start">
-          Проверить Trinka
-        </Button>
-        <Button loading loadingPosition="start" startIcon={<SaveIcon/>}>
-          Проверить оба и сравнить
-        </Button>
+      <ButtonGroup variant="outlined"
+                   aria-label="Loading button group">
+        <TextGearsButton text={text}
+                         onResult={setData}/>
+        <TrinkaButton text={text}
+                      onResult={setData}/>
+        <ComparisonAnalysisButton text={text}
+                                  onResult={setData}/>
       </ButtonGroup>
+      {
+        data &&
+          <JsonEditor data={data} className={style.jsonEditor}/>
+      }
     </Stack>
   );
 }

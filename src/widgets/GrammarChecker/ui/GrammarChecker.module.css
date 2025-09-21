@@ -1,4 +1,9 @@
-.header {
-  height: 2rem;
-  padding: 2rem;
+.grammarChecker {
+  align-items: center;
+  width: 50%;
+}
+
+.jsonEditor {
+  width: 100%;
+  max-width: unset !important;
 }

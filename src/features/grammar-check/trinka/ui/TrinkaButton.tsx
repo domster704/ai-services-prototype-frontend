@@ -25,6 +25,13 @@ const TrinkaButton: FC<ButtonGrammarProps> = ({text, onResult}) => {
     }
   }, [result, onResult]);
 
+  useEffect(() => {
+    if (error) {
+      onResult(null);
+      alert(error)
+    }
+  }, [error, onResult]);
+
   return (
     <Button onClick={() => handleCheck(text)}
             loading={loading}

@@ -19,5 +19,9 @@ export async function fetchTextGearsGrammarCheck(text: string): Promise<TextGear
     })
   });
 
+  if (!response.ok) {
+    throw new Error(`Status: ${response.statusText}. Message: ${await response.text()}`)
+  }
+
   return await response.json() as TextGearsGrammarCheckerObject;
 }
